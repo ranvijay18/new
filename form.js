@@ -1,14 +1,12 @@
-// var form = document.getElementById('form');
-// form.addEventListener('submit', store);
+var form = document.getElementById('form');
+form.addEventListener('submit', store);
 
 // function store(e){
 //     e.preventDefault();
-//     localStorage.setItem('name', document.getElementById('name').value);
-//     localStorage.setItem('email', document.getElementById('email').value);
+//     localStorage.setItem(document.getElementById('email').value, document.getElementById('name').value);
+//     localStorage.setItem(document.getElementById('email').value, document.getElementById('email').value);
 // } 
 
-var form = document.getElementById('form');
-form.addEventListener('submit', store);
 
 function store(e){
     e.preventDefault();
@@ -19,6 +17,10 @@ function store(e){
     
     var myobj_serialized = JSON.stringify(myobj);
 
-    localStorage.setItem("myobj",myobj_serialized);
-
-}
+    localStorage.setItem(document.getElementById('email').value,myobj_serialized);
+    
+    
+    var li = document.createElement('li');
+    var detail = document.getElementById('name').value + ", " + document.getElementById('email').value;
+    li.appendChild(document.createTextNode(detail));
+    document.getElementById("text").appendChild(li);
