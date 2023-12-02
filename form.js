@@ -1,7 +1,6 @@
 var form = document.getElementById('form');
 var itemList = document.getElementById('text');
 form.addEventListener('submit', store);
-// itemList.addEventListener('click', removeItem);
 
 // function store(e){
 //     e.preventDefault();
@@ -34,6 +33,19 @@ function store(e){
   deleteBtn.onclick = () =>{
     localStorage.removeItem(myobj.email);
     itemList.removeChild(li);
+  }
+
+
+  var edit = document.createElement('button');
+  edit.className = 'btn btn-success btn-sm edit';
+  edit.appendChild(document.createTextNode('Edit'));
+  li.append(edit);
+
+  edit.onclick = () =>{
+    localStorage.removeItem(myobj.email);
+    itemList.removeChild(li);
+    document.getElementById('name').value = name;
+    document.getElementById('email').value = email;
   }
 
 }
