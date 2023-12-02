@@ -1,5 +1,7 @@
 var form = document.getElementById('form');
+var itemList = document.getElementById('text');
 form.addEventListener('submit', store);
+// itemList.addEventListener('click', removeItem);
 
 // function store(e){
 //     e.preventDefault();
@@ -10,17 +12,28 @@ form.addEventListener('submit', store);
 
 function store(e){
     e.preventDefault();
-    var myobj = {
-        name : document.getElementById('name').value,
-        email : document.getElementById('email').value
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
+    let myobj = {
+        name,
+        email 
     }
-    
-    var myobj_serialized = JSON.stringify(myobj);
 
-    localStorage.setItem(document.getElementById('email').value,myobj_serialized);
-    
+    localStorage.setItem(myobj.email,JSON.stringify(myobj));
     
     var li = document.createElement('li');
-    var detail = document.getElementById('name').value + ", " + document.getElementById('email').value;
+    var detail = myobj.name + ", " + myobj.email;
     li.appendChild(document.createTextNode(detail));
     document.getElementById("text").appendChild(li);
+
+    var deleteBtn = document.createElement('button');
+  deleteBtn.className = 'btn btn-danger btn-sm delete';
+  deleteBtn.appendChild(document.createTextNode('Delete'));
+  li.appendChild(deleteBtn);
+
+  deleteBtn.onclick = () =>{
+    localStorage.removeItem(myobj.email);
+    itemList.removeChild(li);
+  }
+
+}
